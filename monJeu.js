@@ -27,11 +27,12 @@ var bomb;
 
 
 function preload(){
-	this.load.image('background','assets/sky.png');
-	this.load.image('etoile','assets/star.png');
-	this.load.image('sol','assets/platform.png');
-	this.load.image('bomb','assets/bomb.png');
-	this.load.spritesheet('perso','assets/dude.png',{frameWidth: 32, frameHeight: 48});
+	this.load.image('background','assets/skyy.png');
+	this.load.image('etoile','assets/coins.png');
+	this.load.image('fond','assets/fondd.png');
+	this.load.image('sol','assets/platforme.png');
+	this.load.image('bomb','assets/bomba.png');
+	this.load.spritesheet('perso','assets/dudy.png',{frameWidth: 32, frameHeight: 32});
 }
 
 
@@ -41,8 +42,11 @@ function create(){
 
 	platforms = this.physics.add.staticGroup();
 	platforms.create(400,568,'sol').setScale(2).refreshBody();
-	platforms.create(600,400,'sol');
-	platforms.create(50,250,'sol');
+	platforms.create(200,568,'sol').setScale(2).refreshBody();
+	platforms.create(600,568,'sol').setScale(2).refreshBody();
+	platforms.create(600,380,'sol');
+	platforms.create(70,380,'sol');
+	platforms.create(350,220,'sol');
 
 	player = this.physics.add.sprite(100,450,'perso');
 	player.setCollideWorldBounds(true);
@@ -54,7 +58,7 @@ function create(){
 
 	this.anims.create({
 		key:'left',
-		frames: this.anims.generateFrameNumbers('perso', {start: 0, end: 3}),
+		frames: this.anims.generateFrameNumbers('perso', {start: 0, end: 6}),
 		frameRate: 10,
 		repeat: -1
 	});
@@ -86,11 +90,11 @@ function update(){
 	if(cursors.left.isDown){
 		player.anims.play('left', true);
 		player.setVelocityX(-300);
-		player.setFlipX(false);
+		player.setFlipX(true);
 	}else if(cursors.right.isDown){
 		player.setVelocityX(300);
 		player.anims.play('left', true);
-		player.setFlipX(true);
+		player.setFlipX(false);
 	}else{
 		player.anims.play('stop', true);
 		player.setVelocityX(0);
