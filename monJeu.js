@@ -27,6 +27,7 @@ var bomb;
 
 
 function preload(){
+
 	this.load.image('background','assets/cieux.png');
 	this.load.image('etoile','assets/pice.png');
 	this.load.image('sol','assets/plateform.png');
@@ -129,6 +130,8 @@ function collectStar(player, star){
 		var bomb = bombs.create(x, 16, 'bomb');
 		bomb.setBounce(1);
 		bomb.setCollideWorldBounds(true);
+
 		bomb.setVelocity(Phaser.Math.Between(-50, 500), 20);
+
 	}
 }
