@@ -24,6 +24,8 @@ var cursors;
 var stars;
 var scoreText;
 var bomb;
+var saut = 2;
+var nbsaut = 1;
 
 
 function preload(){
@@ -101,6 +103,57 @@ function update(){
 
 	if(cursors.up.isDown && player.body.touching.down){
 		player.setVelocityY(-330);
+	}
+	
+	if(cursors.up.isDown && player.body.touching.down){
+
+		saut = 2;
+
+	}
+
+
+	if ((nbsaut==1) && saut>0 && cursors.up.isDown){
+
+		saut --;
+
+		nbsaut=0;
+
+		if (saut == 1) {
+
+		player.setVelocityY(-330);
+
+			if (player.body.velocity.y<0) {
+
+				player.anims.play('left',true);
+
+			}
+
+		}
+
+
+		if (saut == 0) {
+
+		player.setVelocityY(-330);
+
+			if (player.body.velocity.y<0) {
+
+				player.anims.play('left',true);
+
+			}
+
+		}
+
+	}
+
+
+	if (cursors.up.isUp) {
+
+		nbsaut=1;
+
+	}
+	
+	if(cursors.down.isDown){
+		player.setVelocityY(500);
 	}
 
 }
