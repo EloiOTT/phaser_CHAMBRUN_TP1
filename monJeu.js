@@ -31,13 +31,13 @@ var pvtext;
 
 
 function preload(){
-	this.load.image('background','assets/ciel.png');
-	this.load.image('etoile','assets/piece.png');
-	this.load.image('sol','assets/platforma.png');
-	this.load.image('bomb','assets/bombo.png');
-	this.load.spritesheet('perso','assets/dudi.png',{frameWidth: 32, frameHeight: 32});
-}
 
+	this.load.image('background','assets/cieux.png');
+	this.load.image('etoile','assets/pice.png');
+	this.load.image('sol','assets/plateform.png');
+	this.load.image('bomb','assets/boule.png');
+	this.load.spritesheet('perso','assets/dudie.png',{frameWidth: 32, frameHeight: 32});
+}
 
 
 function create(){
@@ -154,7 +154,8 @@ function update(){
 		nbsaut=1;
 
 	}
-	
+
+	//chute accéléré
 	if(cursors.down.isDown){
 		player.setVelocityY(500);
 	}
@@ -186,6 +187,8 @@ function collectStar(player, star){
 		var bomb = bombs.create(x, 16, 'bomb');
 		bomb.setBounce(1);
 		bomb.setCollideWorldBounds(true);
-		bomb.setVelocity(Phaser.Math.Between(-30, 500), 20);
+
+		bomb.setVelocity(Phaser.Math.Between(-50, 500), 20);
+
 	}
 }
