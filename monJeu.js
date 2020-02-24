@@ -24,6 +24,10 @@ var cursors;
 var stars;
 var scoreText;
 var bomb;
+var saut = 2;
+var nbsaut = 1;
+var pv = 3;
+var pvtext;
 
 
 function preload(){
@@ -77,7 +81,8 @@ function create(){
 	this.physics.add.collider(stars,platforms);
 	this.physics.add.overlap(player,stars,collectStar,null,this);
 
-	scoreText = this.add.text(16,16, 'score: 0', {fontSize: '32px', fill:'#000'});
+	scoreText = this.add.text(16,16, 'score: 0', {fontSize: '32px', fill:'#FFF'});
+	pvtext = this.add.text(16,50, 'pv: 3', {fontSize: '30px', fill:'#FFF'});
 	bombs = this.physics.add.group();
 	this.physics.add.collider(bombs,platforms);
 	this.physics.add.collider(player,bombs, hitBomb, null, this);
@@ -102,13 +107,68 @@ function update(){
 	if(cursors.up.isDown && player.body.touching.down){
 		player.setVelocityY(-330);
 	}
+	
+	if(cursors.up.isDown && player.body.touching.down){
+
+		saut = 2;
+
+	}
+
+
+	if ((nbsaut==1) && saut>0 && cursors.up.isDown){
+
+		saut --;
+
+		nbsaut=0;
+
+		if (saut == 1) {
+
+		player.setVelocityY(-330);
+
+			if (player.body.velocity.y<0) {
+
+				player.anims.play('left',true);
+
+			}
+
+		}
+
+
+		if (saut == 0) {
+
+		player.setVelocityY(-330);
+
+			if (player.body.velocity.y<0) {
+
+				player.anims.play('left',true);
+
+			}
+
+		}
+
+	}
+
+
+	if (cursors.up.isUp) {
+
+		nbsaut=1;
+
+	}
+	
+	if(cursors.down.isDown){
+		player.setVelocityY(500);
+	}
 
 }
 function hitBomb(player, bomb){
-	this.physics.pause();
-	player.setTint(0xff0000);
-	player.anims.play('turn');
-	gameOver=true;
+	pv -= 1;
+	pvtext.setText('pv: ' + pv);
+	if(pv<1){
+		this.physics.pause();
+		player.setTint(0XEA44);
+		player.anims.play('turn');
+		gameOver=true;
+	}
 }
 
 function collectStar(player, star){
